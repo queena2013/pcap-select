@@ -13,7 +13,7 @@ let Api = {
   },
   gitAllparkByarea: (params) => {
     return axios.post(`${globalPath}/Park/getAllMainParkByArea`, params);
-  },
+  }
 }
 
 export default Api;
