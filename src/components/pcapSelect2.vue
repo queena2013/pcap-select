@@ -24,11 +24,17 @@
     },
     methods: {
       async getChildrens(res){
+        console.log(res.length);
         let selectProvinceIndex = this.provinces.indexOf(res[0]);
         if(res.length == 1){
           let province = res[0];
           await this.getAllCity(province, selectProvinceIndex+1);
         }else if(res.length == 2){
+          let selectCityIndex = this.citys.indexOf(res[1]);
+          await this.getAllArea(res, selectProvinceIndex+1, selectCityIndex);
+        }else{
+          let province = res[0];
+          await this.getAllCity(province, selectProvinceIndex+1);
           let selectCityIndex = this.citys.indexOf(res[1]);
           await this.getAllArea(res, selectProvinceIndex+1, selectCityIndex);
         }
@@ -114,7 +120,7 @@
     async mounted() {
       if(this.nowArea.length > 1){
         await this.getAllProvince();
-        await this.getChildrens(this.nowArea.slice(0, this.nowArea.length-2));
+        await this.getChildrens(this.nowArea);
       }else{
         await this.getAllProvince();
       };
